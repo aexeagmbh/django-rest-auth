@@ -62,11 +62,6 @@ class LogoutView(APIView):
     permission_classes = (AllowAny,)
 
     def post(self, request):
-        try:
-            request.user.auth_token.delete()
-        except (AttributeError, ObjectDoesNotExist):
-            pass
-
         logout(request)
 
         return Response({"success": "Successfully logged out."},
